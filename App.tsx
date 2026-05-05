@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { View, StyleSheet, TouchableOpacity, Animated, Dimensions } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Animated, Dimensions, ImageBackground } from 'react-native';
 import HomeScreen from './scr/screen/HomeScreen';
 import CheckScreen from './scr/screen/CheckScreen';
 import CalendarScreen from './scr/screen/CalendarScreen';
@@ -20,31 +20,32 @@ const MARGIN = 20;
 const TAB_BAR_WIDTH = width - MARGIN * 2;
 const TAB_WIDTH = TAB_BAR_WIDTH / 4;
 
-const CustomTabBar = ({ state, descriptors, navigation }: any) => {
+const CustomTabBar = ({ state, descriptors: _descriptors, navigation }: any) => {
   const translateX = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.spring(translateX, {
       toValue: state.index * TAB_WIDTH,
       useNativeDriver: true,
-      friction: 8,
-      tension: 40,
+      friction: 9,
+      tension: 55,
     }).start();
-  }, [state.index]);
+  }, [state.index, translateX]);
 
   return (
     <View style={styles.tabBarContainer}>
+      <View style={styles.glassTint} />
       <BlurView
         style={StyleSheet.absoluteFill}
         blurType="light"
-        blurAmount={30}
-        reducedTransparencyFallbackColor="rgba(255, 255, 255, 0.5)"
+        blurAmount={24}
+        reducedTransparencyFallbackColor="rgba(232, 246, 249, 0.84)"
       />
 
-      {/* Top Glass Edge Reflection */}
       <View style={styles.glassEdge} />
+      <View style={styles.softGlassEdge} />
+      <View style={styles.innerGlow} />
 
-      {/* Sliding Indicator */}
       <Animated.View
         style={[
           styles.slidingIndicator,
@@ -58,7 +59,7 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
       </Animated.View>
 
       {state.routes.map((route: any, index: number) => {
-        const { options } = descriptors[route.key];
+        // const { options } = descriptors[route.key];
         const isFocused = state.index === index;
 
         const onPress = () => {
@@ -84,13 +85,13 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
             key={index}
             onPress={onPress}
             style={styles.tabItem}
-            activeOpacity={0.8}
+            activeOpacity={0.7}
           >
             <IconComponent
-              width={isFocused ? 28 : 26}
-              height={isFocused ? 28 : 26}
-              stroke={isFocused ? '#1e293b' : 'rgba(30, 41, 59, 0.35)'}
-              strokeWidth={2.5}
+              width={26}
+              height={26}
+              stroke={isFocused ? '#174456' : 'rgba(37, 65, 76, 0.54)'}
+              strokeWidth={isFocused ? 1.8 : 1.45}
             />
           </TouchableOpacity>
         );
@@ -99,18 +100,20 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
   );
 };
 
+const renderCustomTabBar = (props: any) => <CustomTabBar {...props} />;
+
 const App = () => {
   return (
     <SafeAreaProvider>
-      <View style={styles.rootContainer}>
-        {/* Global Atmospheric Background */}
-        <View style={[styles.glow, styles.glowTop]} />
-        <View style={[styles.glow, styles.glowBottom]} />
-
-        <View style={{ flex: 1 }}>
+      <ImageBackground 
+        source={require('./assets/background/bg.png')} 
+        style={styles.rootContainer}
+        resizeMode="cover"
+      >
+        <View style={styles.appContent}>
           <NavigationContainer>
             <Tab.Navigator
-              tabBar={(props) => <CustomTabBar {...props} />}
+              tabBar={renderCustomTabBar}
               screenOptions={{
                 headerShown: false,
                 sceneStyle: { backgroundColor: 'transparent' },
@@ -123,7 +126,7 @@ const App = () => {
             </Tab.Navigator>
           </NavigationContainer>
         </View>
-      </View>
+      </ImageBackground>
     </SafeAreaProvider>
   );
 };
@@ -131,54 +134,66 @@ const App = () => {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    backgroundColor: '#E0E9EF', 
   },
-  glow: {
-    position: 'absolute',
-    width: width * 0.9,
-    height: width * 0.9,
-    borderRadius: (width * 0.9) / 2,
-    opacity: 0.4,
+  appContent: {
+    flex: 1,
   },
-  glowTop: {
-    top: -100,
-    right: -100,
-    backgroundColor: '#9ACBDD',
-  },
-  glowBottom: {
-    bottom: -100,
-    left: -150,
-    backgroundColor: '#C5DDE8',
-  },
-
-
   tabBarContainer: {
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 35,
+    bottom: 34,
     marginHorizontal: MARGIN,
     width: TAB_BAR_WIDTH,
-    height: 75,
-    borderRadius: 37.5,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    height: 78,
+    borderRadius: 39,
+    backgroundColor: 'rgba(232, 249, 252, 0.38)',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)', 
+    borderColor: 'rgba(255, 255, 255, 0.62)',
     overflow: 'hidden',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.1,
-    shadowRadius: 15,
-    elevation: 10,
+    shadowColor: '#12313B',
+    shadowOffset: { width: 0, height: 14 },
+    shadowOpacity: 0.22,
+    shadowRadius: 22,
+    elevation: 14,
+    zIndex: 1000,
+  },
+  glassTint: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(255, 255, 255, 0.16)',
     zIndex: 1000,
   },
   glassEdge: {
     position: 'absolute',
     top: 0,
-    left: 20,
-    right: 20,
+    left: 34,
+    right: 34,
     height: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)', 
+    backgroundColor: 'rgba(255, 255, 255, 0.72)',
+    zIndex: 1002,
+  },
+  softGlassEdge: {
+    position: 'absolute',
+    top: 1,
+    left: 18,
+    right: 18,
+    height: 10,
+    borderTopLeftRadius: 38,
+    borderTopRightRadius: 38,
+    borderTopWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.34)',
+    backgroundColor: 'rgba(255, 255, 255, 0.07)',
+    zIndex: 1002,
+  },
+  innerGlow: {
+    position: 'absolute',
+    left: 1,
+    right: 1,
+    bottom: 1,
+    height: 30,
+    borderBottomLeftRadius: 38,
+    borderBottomRightRadius: 38,
+    backgroundColor: 'rgba(255, 255, 255, 0.14)',
     zIndex: 1002,
   },
   tabItem: {
@@ -186,22 +201,27 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1001,
+    zIndex: 1004,
   },
   slidingIndicator: {
     position: 'absolute',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 999,
+    zIndex: 1003,
   },
   indicatorPill: {
-    width: 65,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+    width: 68,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: 'rgba(255, 255, 255, 0.34)',
     borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.03)',
+    borderColor: 'rgba(255, 255, 255, 0.52)',
+    shadowColor: '#234957',
+    shadowOffset: { width: 0, height: 7 },
+    shadowOpacity: 0.14,
+    shadowRadius: 12,
+    elevation: 5,
   },
 });
 

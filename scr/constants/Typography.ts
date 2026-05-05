@@ -3,11 +3,13 @@ import { StyleSheet } from "react-native";
 export const Typography = StyleSheet.create({
 
     poppins : {
-        fontFamily  : "Poppins-Regular"
+        fontFamily  : "Poppins-Regular",
+        color : 'white'
     },
     title : {
         fontFamily : "Poppins-Regular",
-        fontSize : 24,
+        fontSize : 15,
+        color:'white'
 
     }
 

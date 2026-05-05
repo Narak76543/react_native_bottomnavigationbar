@@ -1,27 +1,8 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { StyleSheet } from "react-native";
-import { Typography } from "../constants/Typography";
+import UnderConstruction from "../components/UnderConstruction";
 
 const CalendarScreen = () => (
-    <View style={styles.calendarContainer}>
-        <Text style={[styles.textCalendarScreen, Typography.poppins]}>
-            Calendar Screen
-        </Text>
-    </View>
+    <UnderConstruction title="Appointment Calendar" />
 );
 
-const styles = StyleSheet.create({
-    calendarContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'transparent'
-    },
-    textCalendarScreen: {
-        fontSize: 32,
-        color: '#1e293b'
-    }
-});
-
-export default CalendarScreen; 
+export default CalendarScreen;
