@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useMemo, useRef, useEffect } from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, { useCallback, useState, useMemo, useRef } from 'react';
 import {
     View,
     Text,
@@ -11,7 +12,6 @@ import {
     TouchableOpacity,
     Platform,
     UIManager,
-    Animated
 } from 'react-native';
 import { Typography } from '../constants/Typography';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -19,8 +19,8 @@ import MapPinSvg from '../../assets/icon/map-pin.svg';
 import BellSvg from '../../assets/icon/bell-check.svg';
 import { Appointment } from '../models/Appointment';
 import { AppointmentCard } from '../components/AppointmentCard';
-import { Specailty } from '../models/Specailty';
-import { Specialty } from '../components/SpecialtyItem';
+import type { Specialty } from '../models/Specailty';
+import { SpecialtyComponent } from '../components/SpecialtyItem';
 import { PopularDoctorCard } from '../components/PopularDoctorCard';
 import { PopularDoctor } from '../models/PopularDoctor';
 
@@ -33,61 +33,77 @@ import HouseSvg from '../../assets/icon/house.svg';
 import CalendarSvg from '../../assets/icon/calendar-days.svg';
 import CheckSvg from '../../assets/icon/circle-check.svg';
 
-const specialtiesData: Specailty[] = [
-    { id: '1', name: 'Neurologist', specailtyIcon: BrainSvg },
-    { id: '2', name: 'Dentist', specailtyIcon: HouseSvg },
-    { id: '3', name: 'Cardiologist', specailtyIcon: CalendarSvg },
-    { id: '4', name: 'Dermatologist', specailtyIcon: CheckSvg },
+const specialtiesData: Specialty[] = [
+    { 
+        id: '1', 
+        name: 'Neurologist', 
+        specialtyIcon: BrainSvg 
+    },
+    { 
+        id: '2', 
+        name: 'Dentist', 
+        specialtyIcon: HouseSvg 
+    },
+    { 
+        id: '3', 
+        name: 'Cardiologist', 
+        specialtyIcon: CalendarSvg 
+    },
+    { 
+        id: '4', 
+        name: 'Dermatologist', 
+        specialtyIcon: CheckSvg 
+    },
 ];
 
 const popularDoctors: PopularDoctor[] = [
     {
-        id: '1',
-        name: 'Dr. Sun Vatanak',
-        specialty: 'Neurologist',
-        rating: 4.8,
-        image: require('../../assets/image/dr3.png'),
+        id        : '1',
+        name      : 'Dr. Sun Vatanak',
+        specialty : 'Neurologist',
+        rating    : 4.8,
+        image     : require('../../assets/image/dr3.png'),
         isFavorite: true,
     },
     {
-        id: '2',
-        name: 'Dr. David Jones',
-        specialty: 'Cardiologist',
-        rating: 4.9,
-        image: require('../../assets/image/dr.jpg'),
+        id        : '2',
+        name      : 'Dr. David Jones',
+        specialty : 'Cardiologist',
+        rating    : 4.9,
+        image     : require('../../assets/image/dr.jpg'),
         isFavorite: false,
     },
 ];
 
 const appointments: Appointment[] = [
     {
-        id: '1',
-        doctorName: 'Dr. Meng Seyha',
-        specialty: 'Cardiologist',
-        date: '07 November Sunday',
-        time: '3:00 am GT+7',
+        id         : '1',
+        doctorName : 'Dr. Meng Seyha',
+        specialty  : 'Cardiologist',
+        date       : '07 November Sunday',
+        time       : '3:00 am GT+7',
         doctorImage: require('../../assets/image/dr.jpg')
     },
     {
-        id: '2',
-        doctorName: 'Dr. Yon Chanranuth',
-        specialty: 'Cardiologist',
-        date: '08 November Monday',
-        time: '3:00 am GT+7',
+        id         : '2',
+        doctorName : 'Dr. Yon Chanranuth',
+        specialty  : 'Cardiologist',
+        date       : '08 November Monday',
+        time       : '3:00 am GT+7',
         doctorImage: require('../../assets/image/dr2.jpg')
     },
     {
-        id: '3',
-        doctorName: 'Dr. Sun Vatanak',
-        specialty: 'Cardiologist',
-        date: '09 November Tuesday',
-        time: '3:00 am GT+7',
+        id         : '3',
+        doctorName : 'Dr. Sun Vatanak',
+        specialty  : 'Cardiologist',
+        date       : '09 November Tuesday',
+        time       : '3:00 am GT+7',
         doctorImage: require('../../assets/image/dr3.png')
     },
 ];
 
 const SCREEN_HORIZONTAL_PADDING = 20;
-const CARD_GAP = 14;
+const CARD_GAP = 17;
 
 const HomeHeader = React.memo(() => (
     <View style={styles.header}>
@@ -116,8 +132,6 @@ const UpcomingTitle = React.memo(() => (
 const HomeScreen = () => {
     const { width } = useWindowDimensions();
     const [activeSpecialtyId, setActiveSpecialtyId] = useState('1');
-
-    // For smooth sliding indicator logic
     const scrollRef = useRef<ScrollView>(null);
 
     const cardWidth = useMemo(() => width - SCREEN_HORIZONTAL_PADDING * 2, [width]);
@@ -172,7 +186,7 @@ const HomeScreen = () => {
                     initialNumToRender={appointments.length}
                     maxToRenderPerBatch={appointments.length}
                     windowSize={3}
-                />
+                /> 
 
                 {/* Doctor Specialty Section */}
                 <View style={styles.drSpecailtyHeader}>
@@ -197,7 +211,7 @@ const HomeScreen = () => {
                                 onPress={() => handleSpecialtyPress(item.id)}
                                 activeOpacity={0.9}
                             >
-                                <Specialty
+                                <SpecialtyComponent
                                     item={item}
                                     isActive={activeSpecialtyId === item.id}
                                 />

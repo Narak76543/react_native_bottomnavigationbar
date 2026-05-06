@@ -2,10 +2,15 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, Text, Platform, Animated} from 'react-native';
 import { Typography } from '../constants/Typography';
-import { Specailty } from '../models/Specailty';
+import type { Specialty as SpecialtyType } from '../models/Specailty';
 
-const SpecialtyBase = ({ item, isActive }: { item: Specailty, isActive?: boolean }) => {
-    const IconComponent = item.specailtyIcon;
+interface SpecialtyComponentProps {
+    item: SpecialtyType;
+    isActive?: boolean;
+}
+
+const SpecialtyBase = ({ item, isActive }: SpecialtyComponentProps) => {
+    const IconComponent = item.specialtyIcon;
     
     // Animation value: 0 for inactive, 1 for active
     const animatedValue = useRef(new Animated.Value(isActive ? 1 : 0)).current;
@@ -17,7 +22,7 @@ const SpecialtyBase = ({ item, isActive }: { item: Specailty, isActive?: boolean
             friction: 9, // User specified
             tension: 55, // User specified
         }).start();
-    }, [isActive]);
+    }, [isActive, animatedValue]);
 
     // Interpolations
     const containerWidth = animatedValue.interpolate({
@@ -86,7 +91,7 @@ const SpecialtyBase = ({ item, isActive }: { item: Specailty, isActive?: boolean
     );
 };
 
-export const Specialty = React.memo(SpecialtyBase);
+export const SpecialtyComponent = React.memo<SpecialtyComponentProps>(SpecialtyBase);
 
 const styles = StyleSheet.create({
     itemContainer: {
@@ -123,6 +128,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         marginLeft: 8,
-        minWidth: 110, // Prevent text wrapping
-    },
+        minWidth: 110
+    }
 });
