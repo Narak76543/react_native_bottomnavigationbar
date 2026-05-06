@@ -5,7 +5,7 @@ import { Typography } from '../constants/Typography';
 import type { Specialty as SpecialtyType } from '../models/Specailty';
 
 interface SpecialtyComponentProps {
-    item: SpecialtyType;
+    item     : SpecialtyType;
     isActive?: boolean;
 }
 
@@ -17,21 +17,21 @@ const SpecialtyBase = ({ item, isActive }: SpecialtyComponentProps) => {
 
     useEffect(() => {
         Animated.spring(animatedValue, {
-            toValue: isActive ? 1 : 0,
+            toValue        : isActive ? 1: 0,
             useNativeDriver: false,
-            friction: 9, // User specified
-            tension: 55, // User specified
+            friction       : 9,                // User specified
+            tension        : 55,               // User specified
         }).start();
     }, [isActive, animatedValue]);
 
     // Interpolations
     const containerWidth = animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [54, 165], // 54 (circle) -> 165 (expanded)
+        inputRange : [0, 1],
+        outputRange: [54, 165],   // 54 (circle) -> 165 (expanded)
     });
 
     const backgroundColor = animatedValue.interpolate({
-        inputRange: [0, 1],
+        inputRange : [0, 1],
         outputRange: ['rgba(255, 255, 255, 0.25)', '#41849A'],
     });
 
@@ -43,13 +43,13 @@ const SpecialtyBase = ({ item, isActive }: SpecialtyComponentProps) => {
     });
 
     const labelOpacity = animatedValue.interpolate({
-        inputRange: [0.7, 1],
+        inputRange : [0.7, 1],
         outputRange: [0, 1],
     });
 
     const labelWidth = animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 100], // The "0 to 125" part probably refers to the expansion
+        inputRange : [0, 1],
+        outputRange: [0, 100],   // The "0 to 125" part probably refers to the expansion
     });
 
     return (
@@ -66,18 +66,18 @@ const SpecialtyBase = ({ item, isActive }: SpecialtyComponentProps) => {
             <Animated.View style={[styles.iconWrapper, { backgroundColor: iconWrapperBackground }]}>
                 {typeof IconComponent === 'function' ? (
                     <IconComponent 
-                        width={24} 
-                        height={24} 
-                        stroke={isActive ? '#41849A' : '#FFFFFF'} 
-                        strokeWidth={1.5}
+                        width       = {24}
+                        height      = {24}
+                        stroke      = {isActive ? '#41849A' : '#FFFFFF'}
+                        strokeWidth = {1.5}
                     />
                 ) : null}
             </Animated.View>
             
             <Animated.View style={{ 
-                opacity: labelOpacity, 
-                width: labelWidth,
-                overflow: 'hidden',
+                opacity       : labelOpacity,
+                width         : labelWidth,
+                overflow      : 'hidden',
                 justifyContent: 'center',
             }}>
                 <Text 
@@ -95,21 +95,21 @@ export const SpecialtyComponent = React.memo<SpecialtyComponentProps>(SpecialtyB
 
 const styles = StyleSheet.create({
     itemContainer: {
-        height: 54,
-        borderRadius: 27,
-        flexDirection: 'row',
-        alignItems: 'center',
+        height           : 54,
+        borderRadius     : 27,
+        flexDirection    : 'row',
+        alignItems       : 'center',
         paddingHorizontal: 5,
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.4)',
+        borderWidth      : 1,
+        borderColor      : 'rgba(255, 255, 255, 0.4)',
     },
     activeShadow: {
         ...Platform.select({
             ios: {
-                shadowColor: '#41849A',
-                shadowOffset: { width: 0, height: 4 },
+                shadowColor  : '#41849A',
+                shadowOffset : { width: 0, height: 4 },
                 shadowOpacity: 0.3,
-                shadowRadius: 10,
+                shadowRadius : 10,
             },
             android: {
                 elevation: 6,
@@ -117,17 +117,17 @@ const styles = StyleSheet.create({
         }),
     },
     iconWrapper: {
-        width: 42,
-        height: 42,
-        borderRadius: 21,
+        width         : 42,
+        height        : 42,
+        borderRadius  : 21,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems    : 'center',
     },
     specName: {
-        color: 'white',
-        fontSize: 14,
+        color     : 'white',
+        fontSize  : 14,
         fontWeight: '400',
         marginLeft: 8,
-        minWidth: 110
+        minWidth  : 110
     }
 });

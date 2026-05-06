@@ -168,24 +168,24 @@ const HomeScreen = () => {
 
                 {/* Appointment Carousel */}
                 <FlatList
-                    data={appointments}
+                    data = {appointments}
                     horizontal
-                    keyExtractor={item => item.id}
-                    renderItem={renderAppointment}
-                    getItemLayout={getItemLayout}
-                    showsHorizontalScrollIndicator={false}
-                    snapToInterval={snapInterval}
-                    snapToAlignment="start"
-                    decelerationRate="fast"
+                    keyExtractor                   = {item => item.id}
+                    renderItem                     = {renderAppointment}
+                    getItemLayout                  = {getItemLayout}
+                    showsHorizontalScrollIndicator = {false}
+                    snapToInterval                 = {snapInterval}
+                    snapToAlignment                = "start"
+                    decelerationRate               = "fast"
                     disableIntervalMomentum
-                    bounces={false}
-                    overScrollMode="never"
-                    contentContainerStyle={styles.carouselContent}
-                    style={styles.carousel}
+                    bounces               = {false}
+                    overScrollMode        = "never"
+                    contentContainerStyle = {styles.carouselContent}
+                    style                 = {styles.carousel}
                     removeClippedSubviews
-                    initialNumToRender={appointments.length}
-                    maxToRenderPerBatch={appointments.length}
-                    windowSize={3}
+                    initialNumToRender  = {appointments.length}
+                    maxToRenderPerBatch = {appointments.length}
+                    windowSize          = {3}
                 /> 
 
                 {/* Doctor Specialty Section */}
@@ -198,12 +198,12 @@ const HomeScreen = () => {
 
                 <View style={styles.specailtyContainer}>
                     <ScrollView
-                        ref={scrollRef}
+                        ref = {scrollRef}
                         horizontal
-                        showsHorizontalScrollIndicator={false}
-                        style={styles.specailtyScroll}
-                        contentContainerStyle={styles.specailtyScrollContent}
-                        decelerationRate="fast"
+                        showsHorizontalScrollIndicator = {false}
+                        style                          = {styles.specailtyScroll}
+                        contentContainerStyle          = {styles.specailtyScrollContent}
+                        decelerationRate               = "fast"
                     >
                         {specialtiesData.map((item) => (
                             <TouchableOpacity
@@ -246,78 +246,78 @@ const styles = StyleSheet.create({
         flex: 1
     },
     verticalContainer: {
-        flex: 1,
+        flex      : 1,
         paddingTop: 8
     },
     header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 10,
+        flexDirection    : 'row',
+        justifyContent   : 'space-between',
+        alignItems       : 'center',
+        marginBottom     : 10,
         paddingHorizontal: 20,
     },
     drImage: {
-        width: 44,
-        height: 44,
+        width       : 44,
+        height      : 44,
         borderRadius: 22
     },
     headerLeftSide: {
         flexDirection: 'row',
-        gap: 10
+        gap          : 10
     },
     drNameText: {
         fontSize: 15,
-        color: 'white'
+        color   : 'white'
     },
     drLocationText: {
         fontSize: 10,
-        color: 'white'
+        color   : 'white'
     },
     locationSectionRow: {
         flexDirection: 'row', gap: 2
     },
     bgOfBell: {
-        width: 50, height: 50,
-        borderRadius: 25,
+        width          : 50,                       height: 50,
+        borderRadius   : 25,
         backgroundColor: 'rgba(255,255,255,0.25)',
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent : 'center',
+        alignItems     : 'center',
     },
     upcomingWrapper: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 2,
+        flexDirection    : 'row',
+        justifyContent   : 'center',
+        alignItems       : 'center',
+        marginVertical   : 2,
         paddingHorizontal: 20,
     },
     upcomingText: {
         fontSize: 10,
-        color: 'white'
+        color   : 'white'
     },
     carousel: {
-        overflow: 'visible',
+        overflow : 'visible',
         maxHeight: 260
     },
     carouselContent: {
-        gap: CARD_GAP,
-        paddingBottom: 8,
+        gap              : CARD_GAP,
+        paddingBottom    : 8,
         paddingHorizontal: 20,
     },
     carouselItem: {
         justifyContent: 'center'
     },
     drSpecailtyHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 10,
+        flexDirection    : 'row',
+        justifyContent   : 'space-between',
+        alignItems       : 'center',
+        marginTop        : 10,
+        marginBottom     : 10,
         paddingHorizontal: 20,
     },
     viewAllText: {
         fontSize: 12,
-        color: 'white',
-        opacity: 0.8
+        color   : 'white',
+        opacity : 0.8
     },
     specailtyContainer: {
         height: 80
@@ -326,14 +326,14 @@ const styles = StyleSheet.create({
         overflow: 'visible'
     },
     specailtyScrollContent: {
-        gap: 12,
-        alignItems: 'center',
+        gap              : 12,
+        alignItems       : 'center',
         paddingHorizontal: 20,
-        paddingBottom: 10,
+        paddingBottom    : 10,
     },
     popularDoctorsScroll: {
         paddingHorizontal: 20,
-        paddingBottom: 20,
+        paddingBottom    : 20,
     }
 });
 

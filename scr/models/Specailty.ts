@@ -1,5 +1,5 @@
 export interface Specialty {
-  id: string;
-  name: string;
+  id           : string;
+  name         : string;
   specialtyIcon: any;
 }

@@ -33,14 +33,14 @@ const PopularDoctorCardBase = ({ data }: { data: PopularDoctor }) => {
                     <Image source={data.image} style={styles.doctorImage} />
                     <TouchableOpacity style={styles.favoriteBtn}>
                         <BlurView
-                            style={StyleSheet.absoluteFill}
-                            blurType="light"
-                            blurAmount={10}
+                            style      = {StyleSheet.absoluteFill}
+                            blurType   = "light"
+                            blurAmount = {10}
                         />
                         <Icon 
-                            name={data.isFavorite ? "heart" : "heart-outline"} 
-                            size={18} 
-                            color={data.isFavorite ? "#41849A" : "#41849A"} 
+                            name  = {data.isFavorite ? "heart" : "heart-outline"}
+                            size  = {18}
+                            color = {data.isFavorite ? "#41849A" : "#41849A"}
                         />
                     </TouchableOpacity>
                 </View>
@@ -53,20 +53,20 @@ export const PopularDoctorCard = React.memo(PopularDoctorCardBase);
 
 const styles = StyleSheet.create({
     container: {
-        width: 280,
-        height: 160,
-        borderRadius: 24,
-        overflow: 'hidden',
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.4)',
+        width          : 280,
+        height         : 160,
+        borderRadius   : 24,
+        overflow       : 'hidden',
+        borderWidth    : 1,
+        borderColor    : 'rgba(255, 255, 255, 0.4)',
         backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        marginRight: 16,
+        marginRight    : 16,
         ...Platform.select({
             ios: {
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 4 },
+                shadowColor  : '#000',
+                shadowOffset : { width: 0, height: 4 },
                 shadowOpacity: 0.1,
-                shadowRadius: 10,
+                shadowRadius : 10,
             },
             android: {
                 elevation: 4,
@@ -74,67 +74,67 @@ const styles = StyleSheet.create({
         }),
     },
     content: {
-        flex: 1,
+        flex         : 1,
         flexDirection: 'row',
-        padding: 16,
+        padding      : 16,
     },
     leftSection: {
-        flex: 1,
+        flex          : 1,
         justifyContent: 'center',
     },
     name: {
-        fontSize: 20,
-        fontWeight: '500',
-        color: '#333',
-        lineHeight: 24,
+        fontSize    : 20,
+        fontWeight  : '500',
+        color       : '#333',
+        lineHeight  : 24,
         marginBottom: 4,
     },
     specialty: {
-        fontSize: 14,
-        color: '#666',
+        fontSize    : 14,
+        color       : '#666',
         marginBottom: 12,
     },
     ratingBadge: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-        alignSelf: 'flex-start',
+        flexDirection    : 'row',
+        alignItems       : 'center',
+        backgroundColor  : 'rgba(255, 255, 255, 0.5)',
+        alignSelf        : 'flex-start',
         paddingHorizontal: 8,
-        paddingVertical: 4,
-        borderRadius: 12,
+        paddingVertical  : 4,
+        borderRadius     : 12,
     },
     ratingText: {
-        fontSize: 12,
+        fontSize  : 12,
         fontWeight: '700',
-        color: '#333',
+        color     : '#333',
         marginLeft: 4,
     },
     rightSection: {
-        width: 100,
-        height: '100%',
+        width         : 100,
+        height        : '100%',
         justifyContent: 'flex-end',
-        alignItems: 'flex-end',
+        alignItems    : 'flex-end',
     },
     doctorImage: {
-        width: 120,
-        height: 140,
-        position: 'absolute',
-        bottom: -20,
-        right: -10,
+        width     : 120,
+        height    : 140,
+        position  : 'absolute',
+        bottom    : -20,
+        right     : -10,
         resizeMode: 'contain',
     },
     favoriteBtn: {
-        width: 36,
-        height: 36,
-        borderRadius: 18,
-        overflow: 'hidden',
-        justifyContent: 'center',
-        alignItems: 'center',
+        width          : 36,
+        height         : 36,
+        borderRadius   : 18,
+        overflow       : 'hidden',
+        justifyContent : 'center',
+        alignItems     : 'center',
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.3)',
-        position: 'absolute',
-        top: 0,
-        right: 0,
+        borderWidth    : 1,
+        borderColor    : 'rgba(255, 255, 255, 0.3)',
+        position       : 'absolute',
+        top            : 0,
+        right          : 0,
     },
 });
